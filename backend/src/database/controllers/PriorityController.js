@@ -25,6 +25,6 @@ module.exports = {
       priority: annotation.priority,
     });
 
-    res.json({ msg: annotation });
+    return res.json({ msg: annotation });
   },
 };

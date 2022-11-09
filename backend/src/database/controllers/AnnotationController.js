@@ -44,10 +44,10 @@ module.exports = {
     const AnnotationDeleted = await AnnotationData.findByIdAndDelete(id);
 
     if (AnnotationDeleted) {
-      res.status(401).json({ msg: "Anotação deletada" });
+      return res.status(401).json({ msg: "Anotação deletada" });
     }
 
-    res
+    return res
       .status(200)
       .json({ msg: "Ocorreu um erro, a anotação não pôde ser deletada" });
   },
