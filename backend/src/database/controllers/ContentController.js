@@ -5,17 +5,17 @@ module.exports = {
     const id = req.params.id;
     const { notes } = req.body;
 
-    const annotations = await AnnotationData.findOne({ _id: id });
+    const annotation = await AnnotationData.findOne({ _id: id });
 
     if (notes) {
-      annotations.notes = notes;
+      annotation.notes = notes;
 
       await AnnotationData.findOneAndUpdate({
         _id: id,
-        priority: annotation.priority,
+        notes: annotation.notes,
       });
     }
 
-    return res.status.json(annotations);
+    return res.json(annotation);
   },
 };

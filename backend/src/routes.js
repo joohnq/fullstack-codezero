@@ -12,6 +12,6 @@ routes.delete("/annotations/:id", AnnotationController.delete);
 routes.get("/priorities", PriorityController.read);
 routes.post("/priorities/:id", PriorityController.update);
 
-routes.post("/priorities/:id", ContentController.update);
+routes.post("/contents/:id", ContentController.update);
 
 module.exports = routes;
