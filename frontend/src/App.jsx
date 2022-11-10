@@ -8,11 +8,12 @@ import "./mediaqueries.css";
 const App = () => {
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
+  const [allNotes, setAllNotes] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const resApi = await api.post("/annotations", {
+    const res = await api.post("/annotations", {
       title,
       notes,
       priority: false,
@@ -20,7 +21,18 @@ const App = () => {
 
     setTitle("");
     setNotes("");
+    // setAllNotes([...allNotes, res.data]);
+    console.log(res.data);
   }
+
+  useEffect(() => {
+    async function getAllNotes() {
+      const res = await api.get("/annotations");
+      setAllNotes(res.data);
+    }
+
+    getAllNotes();
+  }, []);
 
   return (
     <div id="app">
@@ -53,11 +65,14 @@ const App = () => {
       </aside>
       <main>
         <ul>
+          {allNotes.map((data) => (
+            <Annotation data={data} />
+          ))}
+          {/* <Annotation />
           <Annotation />
           <Annotation />
           <Annotation />
-          <Annotation />
-          <Annotation />
+          <Annotation /> */}
         </ul>
       </main>
     </div>

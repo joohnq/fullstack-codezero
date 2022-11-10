@@ -2,15 +2,15 @@ import React from "react";
 import "./style.css";
 import "../../App.css";
 
-const Annotation = () => {
+const Annotation = ({ data }) => {
   return (
     <li className="notepad-infos">
       <div>
-        <strong>Fazer Compras</strong>
+        <strong>{data.title}</strong>
         <div>X</div>
       </div>
 
-      <textarea defaultValue="Lorem ipsum dolor, sit amet consectetur"></textarea>
+      <textarea defaultValue={data.notes}></textarea>
 
       <span>!</span>
     </li>
