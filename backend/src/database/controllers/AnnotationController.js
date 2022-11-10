@@ -29,13 +29,13 @@ module.exports = {
         .json({ msg: "O campo de NOTAS deve estar preenchido" });
     }
 
-    await AnnotationData.create({
+    const annotation = await AnnotationData.create({
       title,
       notes,
       priority,
     });
 
-    res.status(200).json({ msg: "Anotação criada com sucesso" });
+    res.status(200).json(annotation);
   },
 
   async delete(req, res) {
@@ -47,8 +47,6 @@ module.exports = {
       return res.status(401).json({ msg: "Anotação deletada" });
     }
 
-    return res
-      .status(200)
-      .json({ msg: "Ocorreu um erro, a anotação não pôde ser deletada" });
+    return res.status(200).json(AnnotationDeleted);
   },
 };
