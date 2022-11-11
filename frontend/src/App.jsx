@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "./services/api";
 import Annotation from "./components/Annotation";
+import RadioButton from "./components/RadioButton";
 import "./global.css";
 import "./App.css";
 import "./mediaqueries.css";
@@ -21,8 +22,7 @@ const App = () => {
 
     setTitle("");
     setNotes("");
-    // setAllNotes([...allNotes, res.data]);
-    console.log(res.data);
+    setAllNotes([...allNotes, res.data]);
   }
 
   useEffect(() => {
@@ -33,6 +33,18 @@ const App = () => {
 
     getAllNotes();
   }, []);
+
+  useEffect(() => {
+    function enableSubmitButton() {
+      let btn = document.getElementById("btn_submit");
+      btn.style.backgroundColor = "#ffd3ca";
+      if (title && notes) {
+        btn.style.backgroundColor = "#eb8f7a";
+      }
+    }
+
+    enableSubmitButton();
+  }, [title, notes]);
 
   return (
     <div id="app">
@@ -60,19 +72,17 @@ const App = () => {
             ></textarea>
           </div>
 
-          <button type="submit">Salvar</button>
+          <button id="btn_submit" type="submit">
+            Salvar
+          </button>
         </form>
+        <RadioButton />
       </aside>
       <main>
         <ul>
           {allNotes.map((data) => (
             <Annotation data={data} />
           ))}
-          {/* <Annotation />
-          <Annotation />
-          <Annotation />
-          <Annotation />
-          <Annotation /> */}
         </ul>
       </main>
     </div>
